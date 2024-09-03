@@ -1,0 +1,96 @@
+Enunciado do Projeto
+Desafio Técnico: Sistema de Registro de Alunos e Notas
+
+Você foi contratado por uma instituição de ensino para desenvolver um sistema de registro de alunos e suas notas em diversos cursos. O objetivo é criar um banco de dados relacional utilizando SQL para gerenciar as informações de alunos, cursos e notas. Seu sistema deve permitir operações básicas de inserção, consulta, atualização e exclusão de dados.
+
+Tarefas:
+
+Criação do Banco de Dados:
+
+Crie um banco de dados chamado Escola.
+Criação das Tabelas:
+
+Tabela Alunos: Deve conter os campos id_aluno (chave primária), nome, data_nascimento, e endereço.
+Tabela Cursos: Deve conter os campos id_curso (chave primária), nome_curso, e descricao.
+Tabela Notas: Deve conter os campos id_nota (chave primária), id_aluno (chave estrangeira para Alunos), id_curso (chave estrangeira para Cursos), e nota.
+Inserção de Dados:
+
+Insira ao menos 3 alunos na tabela Alunos.
+Insira ao menos 3 cursos na tabela Cursos.
+Insira ao menos 5 registros de notas na tabela Notas, associando alunos aos cursos com notas variadas.
+Consultas:
+
+Liste todos os alunos juntamente com as notas que eles obtiveram em cada curso.
+Calcule a média das notas para cada curso.
+Encontre o aluno com a maior nota em cada curso.
+Atualização de Dados:
+
+Atualize a nota de um aluno em um curso específico.
+Modifique o endereço de um aluno para um novo endereço.
+Exclusão de Dados:
+
+Exclua um aluno e todas as suas notas associadas.
+Remova um curso e todas as notas associadas a esse curso.
+Requisitos:
+
+Utilize comandos SQL como CREATE DATABASE, CREATE TABLE, INSERT, SELECT, UPDATE, DELETE, e JOIN.
+As tabelas devem estar corretamente normalizadas.
+As operações devem ser executadas em um ambiente SQL relacional de sua escolha.
+Entrega:
+
+Submeta o código SQL completo em um arquivo .sql.
+Inclua um documento explicativo com uma breve descrição das tabelas e das operações realizadas.
+
+# Sistema de Registro de Alunos e Notas
+
+## Descrição
+
+Este projeto é um sistema de registro de alunos e notas, desenvolvido utilizando SQL. O sistema permite a criação de um banco de dados relacional para gerenciar informações de alunos, cursos e notas, com funcionalidades de inserção, consulta, atualização e exclusão de dados.
+
+## Estrutura do Projeto
+
+- **Banco de Dados:** `Escola`
+- **Tabelas:**
+  - `Alunos`: Armazena os dados dos alunos, incluindo `id_aluno`, `nome`, `data_nascimento`, e `endereço`.
+  - `Cursos`: Armazena os dados dos cursos, incluindo `id_curso`, `nome_curso`, e `descricao`.
+  - `Notas`: Registra as notas dos alunos em cursos específicos, relacionando `id_aluno` e `id_curso` com suas respectivas notas.
+
+## Funcionalidades
+
+- Inserir novos registros de alunos, cursos e notas.
+- Consultar informações sobre alunos, cursos e notas.
+- Atualizar os dados de alunos e notas.
+- Excluir registros de alunos e cursos, com exclusão automática das notas associadas (graças ao `ON DELETE CASCADE`).
+
+## Instruções de Uso
+
+1. **Criar o Banco de Dados e Tabelas:**
+   - Execute o código SQL para criar o banco de dados `Escola` e suas tabelas.
+
+2. **Inserir Dados:**
+   - Utilize os comandos `INSERT` para adicionar registros iniciais nas tabelas `Alunos`, `Cursos`, e `Notas`.
+
+3. **Consultas:**
+   - Execute as consultas SQL para listar alunos, calcular médias e identificar os alunos com as maiores notas.
+
+4. **Atualizações:**
+   - Utilize `UPDATE` para modificar as informações de alunos e notas.
+
+5. **Exclusões:**
+   - Utilize `DELETE` para remover registros de alunos e cursos, garantindo que as notas associadas sejam excluídas automaticamente.
+
+## Requisitos
+
+- Um ambiente SQL para execução dos comandos.
+- Familiaridade com SQL básico.
+
+## Como Executar
+
+1. Abra um cliente de banco de dados SQL.
+2. Execute o arquivo `.sql` fornecido para criar e popular o banco de dados.
+3. Utilize os comandos SQL fornecidos para manipular e consultar os dados.
+
+## Autor
+
+Desenvolvido por [Seu Nome].
+
