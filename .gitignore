@@ -1,0 +1,13 @@
+# Arquivos de banco de dados
+*.sql
+
+# Arquivos de log
+*.log
+
+# Diretórios de ambiente de desenvolvimento
+.vscode/
+.idea/
+
+# Configurações específicas do sistema
+.DS_Store
+Thumbs.db
