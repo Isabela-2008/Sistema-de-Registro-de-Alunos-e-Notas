@@ -1,0 +1,123 @@
+-- Passo 1: Criar o banco de dados
+CREATE DATABASE IF NOT EXISTS Escola;
+USE Escola;
+
+-- Passo 2: Criar as tabelas
+
+-- Tabela Alunos
+CREATE TABLE IF NOT EXISTS Alunos (
+    id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE,
+    endereco VARCHAR(255)
+);
+
+-- Tabela Cursos
+CREATE TABLE IF NOT EXISTS Cursos (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome_curso VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+-- Tabela Notas
+-- Incluído ON DELETE CASCADE para as chaves estrangeiras
+CREATE TABLE IF NOT EXISTS Notas (
+    id_nota INT AUTO_INCREMENT PRIMARY KEY,
+    id_aluno INT NOT NULL,
+    id_curso INT NOT NULL,
+    nota DECIMAL(5, 2) NOT NULL,
+    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno) ON DELETE CASCADE,
+    FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
+);
+
+-- Passo 3: Inserir dados
+
+-- Inserir dados na tabela Alunos
+INSERT INTO Alunos (nome, data_nascimento, endereco) VALUES
+('João Silva', '2000-05-15', 'Rua A, 123'),
+('Maria Oliveira', '1999-07-22', 'Rua B, 456'),
+('Carlos Souza', '2001-02-10', 'Rua C, 789');
+
+-- Inserir dados na tabela Cursos
+INSERT INTO Cursos (nome_curso, descricao) VALUES
+('Matemática', 'Curso de Matemática Básica'),
+('História', 'Curso de História do Brasil'),
+('Ciências', 'Curso de Ciências Naturais');
+
+-- Inserir dados na tabela Notas
+-- Certifique-se de que os IDs de alunos e cursos correspondem aos registros inseridos anteriormente
+INSERT INTO Notas (id_aluno, id_curso, nota) VALUES
+(1, 1, 9.5),
+(1, 2, 8.0),
+(2, 1, 7.5),
+(2, 3, 6.0),
+(3, 2, 9.0),
+(3, 3, 8.5);
+
+-- Passo 4: Consultar dados
+
+-- Listar todos os alunos juntamente com as notas que eles obtiveram em cada curso
+SELECT 
+    a.nome AS 'Aluno',
+    c.nome_curso AS 'Curso',
+    n.nota AS 'Nota'
+FROM 
+    Notas n
+JOIN 
+    Alunos a ON n.id_aluno = a.id_aluno
+JOIN 
+    Cursos c ON n.id_curso = c.id_curso;
+
+-- Calcular a média das notas para cada curso
+SELECT 
+    c.nome_curso AS 'Curso',
+    AVG(n.nota) AS 'Média'
+FROM 
+    Notas n
+JOIN 
+    Cursos c ON n.id_curso = c.id_curso
+GROUP BY 
+    c.nome_curso;
+
+-- Encontrar o aluno com a maior nota em cada curso
+SELECT 
+    c.nome_curso AS 'Curso',
+    a.nome AS 'Aluno',
+    n.nota AS 'Maior Nota'
+FROM 
+    Notas n
+JOIN 
+    Alunos a ON n.id_aluno = a.id_aluno
+JOIN 
+    Cursos c ON n.id_curso = c.id_curso
+WHERE 
+    n.nota = (
+        SELECT MAX(nota) 
+        FROM Notas 
+        WHERE id_curso = c.id_curso
+    )
+GROUP BY 
+    c.nome_curso;
+
+-- Passo 5: Atualizar dados
+
+-- Atualizar a nota de um aluno em um curso específico
+UPDATE Notas
+SET nota = 8.5
+WHERE id_aluno = 2 AND id_curso = 1;
+
+-- Modificar o endereço de um aluno
+UPDATE Alunos
+SET endereco = 'Rua Nova, 123'
+WHERE id_aluno = 1;
+
+-- Passo 6: Deletar dados
+
+-- Excluir um aluno e todas as suas notas associadas
+-- Devido ao ON DELETE CASCADE, as notas associadas serão automaticamente excluídas
+DELETE FROM Alunos
+WHERE id_aluno = 1;
+
+-- Remover um curso e todas as notas associadas a esse curso
+DELETE FROM Cursos
+WHERE id_curso = 2;
